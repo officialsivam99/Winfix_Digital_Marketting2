@@ -1,203 +1,160 @@
-import React from "react";
+// src/components/Header.jsx
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const Header = () => {
-  const BLUE = "#245af0";
+export default function Header() {
+  const PURPLE = "#7c3aed"; // brand accent
   const TEXT = "#111827";
   const MUTED = "#6b7280";
-  const LINE = "#e5e7eb";
+  const BORDER = "#e5e7eb";
 
-  const innerWrap = {
-    maxWidth: 1220,
-    margin: "0 auto",
-    padding: "0 20px",
-    width: "100%",
-  };
-
-  const medium = { fontWeight: 500 };
+  const [open, setOpen] = useState(false);
 
   return (
-    <div style={{ width: "100%", overflowX: "hidden" }}>
-      {/* Top promo bar */}
-      <div style={{ background: BLUE, color: "#fff", ...medium }}>
-        <div
-          className="d-flex align-items-center justify-content-between flex-wrap"
-          style={{ ...innerWrap, height: 44, fontSize: 14 }}
+    <header className="ff-header">
+      <div className="ff-wrap">
+        {/* Left: Brand */}
+        <Link to="/" className="ff-brand">
+          <div className="ff-logo">
+            <span className="ff-logo-mark" />
+          </div>
+          <span className="ff-name">DigiSpark</span>
+        </Link>
+
+        {/* Mobile hamburger */}
+        <button
+          aria-label="Toggle navigation"
+          className={`ff-burger d-lg-none ${open ? "is-open" : ""}`}
+          onClick={() => setOpen((v) => !v)}
         >
-          <div className="d-flex align-items-center gap-3 flex-wrap">
-            <span>✓ Fast shipping on all orders</span>
-            <span>✓ 30-day returns</span>
-          </div>
-          <div className="d-none d-md-flex align-items-center gap-2">
-            <span>Support</span>
-            📞
-            <a
-              href="tel:8335516033"
-              className="text-white text-decoration-none"
-              style={medium}
-            >
-              833-551-6033
-            </a>
-          </div>
+          <span />
+          <span />
+          <span />
+        </button>
+
+        {/* Center: Nav */}
+          <nav className={`ff-nav ${open ? "show" : ""}`}>
+            <Link to="/seo" className="ff-link">SEO</Link>
+            <Link to="/social-media" className="ff-link">Social Media Marketing</Link>
+            <Link to="/content-marketing" className="ff-link">Content Marketing</Link>
+            <Link to="/email-marketing" className="ff-link">Email Marketing</Link>
+            <Link to="/ppc" className="ff-link">PPC</Link>
+            <Link to="/analytics" className="ff-link">Analytics</Link>
+          </nav>
+
+        {/* Right: Actions */}
+        <div className="ff-actions">
+          <Link to="/login" className="ff-login">
+            Login
+          </Link>
+          <Link to="/demo" className="ff-btn ff-outline">
+            Request demo
+          </Link>
+          <Link to="/get-started" className="ff-btn ff-solid">
+            Get started
+          </Link>
         </div>
       </div>
 
-      {/* Main navbar */}
-      <div style={{ background: "#fff" }}>
-        <div
-          className="d-flex align-items-center py-3"
-          style={{ ...innerWrap, gap: 18, flexWrap: "wrap" }}
-        >
-          {/* Logo */}
-          <a
-            href="/"
-            className="d-flex align-items-center justify-content-center"
-            style={{
-              width: 56,
-              height: 56,
-              borderRadius: 14,
-              backgroundColor: BLUE,
-              textDecoration: "none",
-              color: "#fff",
-              ...medium,
-            }}
-          >
-            IPE
-          </a>
+      <style>{`
+        .ff-header{
+          position: sticky;
+          top: 0;
+          z-index: 1050;
+          background: #fff;
+          border-bottom: 1px solid ${BORDER};
+        }
+        .ff-wrap{
+          max-width: 1220px;
+          margin: 0 auto;
+          padding: 12px 20px;
+          display: grid;
+          grid-template-columns: auto 1fr auto;
+          align-items: center;
+          gap: 16px;
+        }
 
-          {/* Brand */}
-          <div className="d-none d-md-block" style={{ marginRight: 10 }}>
-            <div style={{ fontSize: 20, color: BLUE, ...medium }}>
-              Ink & Paper Express
-            </div>
-            <div style={{ fontSize: 14, color: MUTED, ...medium }}>
-              Fast Printer & Ink to Your Doorstep
-            </div>
-          </div>
+        .ff-brand{
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          text-decoration: none;
+        }
+        .ff-logo{ width:28px; height:28px; position:relative; }
+        .ff-logo-mark{
+          display:block; width:100%; height:100%; border-radius:8px;
+          background: linear-gradient(135deg, ${PURPLE}, #9d6bff);
+        }
+        .ff-name{ font-weight:600; color:${TEXT}; font-size:18px; letter-spacing:.2px; }
 
-          {/* Search */}
-          <form
-            className="d-flex align-items-center flex-grow-1 order-3 order-md-0 w-100 w-md-auto"
-            style={{
-              border: `1px solid ${LINE}`,
-              borderRadius: 16,
-              padding: "6px 14px",
-              flex: "1 1 420px",
-              minWidth: 0,
-              maxWidth: 720,
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            🔍
-            <input
-              type="search"
-              className="form-control border-0 ms-2"
-              placeholder="Search for printers, ink, toner, paper..."
-              style={{
-                fontSize: 14,
-                background: "transparent",
-                boxShadow: "none",
-                ...medium,
-              }}
-            />
-          </form>
+        .ff-nav{
+          display:flex; align-items:center; gap:20px; justify-content:center;
+        }
+        .ff-link{
+          color:${MUTED}; text-decoration:none; font-weight:500; font-size:14px;
+          padding:6px 2px; transition:color .2s ease; position:relative;
+        }
+          .ff-link:hover{ color:${TEXT}; }
+          .ff-link.active{ color:${PURPLE}; }
+          .ff-link::after{
+            content:""; position:absolute; left:0; right:0; bottom:-10px;
+            height:2px; background:${PURPLE}; border-radius:2px;
+            opacity:0; transition:opacity .2s;
+          }
+          .ff-link:hover::after{
+            opacity:1;
+          }
+        .caret{ margin-left:6px; font-size:12px; opacity:.8; }
 
-          {/* Actions */}
-          <div className="d-flex align-items-center ms-md-3" style={{ gap: 16 }}>
-            <button
-              className="btn p-0 border-0 bg-transparent"
-              style={{ fontSize: 18 }}
-            >
-              ♡
-            </button>
-            <button
-              className="btn p-0 border-0 bg-transparent"
-              style={{ fontSize: 18 }}
-            >
-              🛒
-            </button>
-            <a
-              href="#"
-              style={{
-                textDecoration: "none",
-                color: TEXT,
-                fontSize: 14,
-                ...medium,
-              }}
-            >
-              Sign In
-            </a>
-            <button
-              className="border-0"
-              style={{
-                background: BLUE,
-                color: "#fff",
-                borderRadius: 10,
-                padding: "6px 14px",
-                fontSize: 14,
-                ...medium,
-              }}
-            >
-              Sign Up
-            </button>
-          </div>
-        </div>
-      </div>
+        .ff-actions{
+          display:flex; align-items:center; gap:12px; justify-self:end;
+        }
+        .ff-login{ color:${PURPLE}; text-decoration:none; font-weight:600; font-size:14px; }
+        .ff-btn{
+          display:inline-flex; align-items:center; justify-content:center;
+          padding:8px 14px; border-radius:10px; font-weight:600; font-size:14px;
+          text-decoration:none; line-height:1;
+          transition: transform .08s ease, box-shadow .2s ease;
+        }
+        .ff-btn:active{ transform:translateY(1px); }
+        .ff-outline{ color:${PURPLE}; border:1px solid ${PURPLE}; background:#fff; }
+        .ff-outline:hover{ box-shadow:0 2px 10px rgba(124,58,237,.15); }
+        .ff-solid{ color:#fff; background:${PURPLE}; border:1px solid ${PURPLE}; }
+        .ff-solid:hover{ box-shadow:0 2px 12px rgba(124,58,237,.25); }
 
-      {/* Category bar */}
-      <div
-        style={{
-          background: "#f7f8fb",
-          borderTop: `1px solid ${LINE}`,
-          borderBottom: `1px solid ${LINE}`,
-        }}
-      >
-        <div style={{ ...innerWrap }}>
-          <ul
-            className="nav justify-content-center gap-4 py-2"
-            style={{ fontSize: 14, ...medium }}
-          >
-            <li className="nav-item">
-              <a className="nav-link text-dark p-0" href="#">
-                Home
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link text-dark p-0" href="#">
-                Home Printer
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link text-dark p-0" href="#">
-                Ink, Toner & Paper
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link text-dark p-0" href="#">
-                Office Printer
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link text-dark p-0" href="#">
-                Inkjet Printers
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link text-dark p-0" href="#">
-                Laser Printers
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link text-dark p-0" href="#">
-                More ▼
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+        .ff-burger{
+          width:38px; height:34px; border:0; background:transparent; padding:6px;
+          display:inline-flex; flex-direction:column; justify-content:space-between; align-items:center;
+        }
+        .ff-burger span{
+          display:block; width:100%; height:2px; background:${TEXT}; border-radius:2px;
+          transition:transform .2s ease, opacity .2s ease;
+        }
+        .ff-burger.is-open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+        .ff-burger.is-open span:nth-child(2){ opacity:0; }
+        .ff-burger.is-open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+        @media (max-width: 991.98px){
+          .ff-wrap{ grid-template-columns: auto auto auto; }
+          .ff-nav{
+            position:absolute; top:60px; left:0; right:0;
+            background:#fff; border-top:1px solid ${BORDER};
+            box-shadow:0 10px 24px rgba(17,24,39,.06);
+            padding:10px 20px;
+            display:none; z-index:1040;
+          }
+          .ff-nav.show{
+            display:flex; flex-direction:column; align-items:flex-start; gap:12px;
+          }
+          .ff-actions{ gap:8px; }
+          .ff-link.active::after{ bottom:-6px; }
+        }
+
+        @media (max-width: 575.98px){
+          .ff-actions .ff-outline{ display:none; }
+        }
+      `}</style>
+    </header>
   );
-};
-
-export default Header;
+}

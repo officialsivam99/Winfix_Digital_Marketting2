@@ -5,9 +5,11 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from './App';
-import About from './pages/about'
+
 import Services from './pages/services';
 import Pagenotfound from './pages/pagenotfound';
+import "bootstrap/dist/css/bootstrap.min.css";
+
 
 let pages = [
   {
@@ -18,10 +20,6 @@ let pages = [
   {
     path: "/home",
     element: <App />
-  },
-  {
-    path: "/about",
-    element: <About />
   },
   {
     path: "/services",

@@ -1,259 +1,184 @@
-import React, { useEffect, useRef, useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+// src/components/Hero.jsx
+import React from "react";
+import { Container, Image } from "react-bootstrap";
+import BrandScroll from "./BrandScroll";
 
-const Hero = () => {
-  // === replace with your two hero images ===
-  const slides = [
-    "https://images.unsplash.com/photo-1587307307189-0354b351e9e1?q=80&w=1149&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://plus.unsplash.com/premium_photo-1664298787350-7f9785603c7e?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  ];
+const leftImgs   = [1, 2, 3, 14, 101, 102];
+const middleImgs = [4, 5, 6, 15, 201, 202];
+const rightImgs  = [7, 8, 9, 16, 301, 302];
 
-  const [index, setIndex] = useState(0);
-  const timerRef = useRef(null);
+const src = (n) => `https://picsum.photos/seed/${n}/900/600`;
 
-  const next = () => setIndex((i) => (i + 1) % slides.length);
-  const prev = () => setIndex((i) => (i - 1 + slides.length) % slides.length);
-  const goTo = (i) => setIndex(i);
-
-  const start = () => {
-    stop();
-    timerRef.current = setInterval(next, 5000);
-  };
-  const stop = () => timerRef.current && clearInterval(timerRef.current);
-
-  useEffect(() => {
-    start();
-    return stop;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+function Column({ imgs, speed = 22, direction = "up" }) {
+  const animClass = direction === "up" ? "scroll-up" : "scroll-down";
   return (
-    <div style={{ width: "100%", overflowX: "hidden" }}>
-      {/* ====== SLIDES (hero) ====== */}
-      <section
-        onMouseEnter={stop}
-        onMouseLeave={start}
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "80vh",
-          overflow: "hidden",
-        }}
-      >
-        {/* Slides */}
-        <div style={{ position: "absolute", inset: 0 }}>
-          {slides.map((src, i) => (
-            <div
-              key={i}
-              style={{
-                position: "absolute",
-                inset: 0,
-                backgroundImage: `url(${src})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                transition: "opacity 800ms ease",
-                opacity: i === index ? 1 : 0,
-              }}
-            />
-          ))}
-          {/* dark overlay */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45))",
-            }}
-          />
-        </div>
-
-        {/* Centered content */}
-        <div
-          className="d-flex flex-column align-items-center justify-content-center text-center"
-          style={{
-            position: "relative",
-            zIndex: 2,
-            height: "100%",
-            color: "#fff",
-            padding: "0 16px",
-          }}
-        >
-          <h1
-            style={{
-              fontSize: "64px",
-              lineHeight: 1.1,
-              fontWeight: 800,
-              marginBottom: 16,
-            }}
-          >
-            Complete Office Solutions
-          </h1>
-
-          <h2 style={{ fontSize: "32px", fontWeight: 600, marginBottom: 16 }}>
-            Professional Printing Solutions
-          </h2>
-
-          <p
-            style={{
-              maxWidth: 980,
-              fontSize: "22px",
-              lineHeight: 1.5,
-              fontWeight: 500,
-              marginBottom: 28,
-            }}
-          >
-            Discover the latest OfficeJet Pro printers with wireless connectivity,
-            mobile printing, and ultra-high quality output for your business
-            needs.
-          </p>
-
-          <button
-            className="btn"
-            style={{
-              background: "#ffffff",
-              color: "#111827",
-              borderRadius: 10,
-              padding: "12px 22px",
-              fontWeight: 700,
-              boxShadow: "0 6px 12px rgba(0,0,0,.2)",
-            }}
-          >
-            Explore Pro Series
-          </button>
-        </div>
-
-        {/* Arrows */}
-        <button
-          aria-label="Previous slide"
-          onClick={prev}
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: 16,
-            transform: "translateY(-50%)",
-            width: 48,
-            height: 48,
-            borderRadius: "50%",
-            border: 0,
-            background: "rgba(255,255,255,.35)",
-            color: "#fff",
-            fontSize: 28,
-            lineHeight: 1,
-            cursor: "pointer",
-            display: "grid",
-            placeItems: "center",
-            zIndex: 3,
-          }}
-        >
-          ‹
-        </button>
-        <button
-          aria-label="Next slide"
-          onClick={next}
-          style={{
-            position: "absolute",
-            top: "50%",
-            right: 16,
-            transform: "translateY(-50%)",
-            width: 48,
-            height: 48,
-            borderRadius: "50%",
-            border: 0,
-            background: "rgba(255,255,255,.35)",
-            color: "#fff",
-            fontSize: 28,
-            lineHeight: 1,
-            cursor: "pointer",
-            display: "grid",
-            placeItems: "center",
-            zIndex: 3,
-          }}
-        >
-          ›
-        </button>
-
-        {/* Dots */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 22,
-            left: "50%",
-            transform: "translateX(-50%)",
-            display: "flex",
-            gap: 10,
-            zIndex: 3,
-          }}
-        >
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              aria-label={`Go to slide ${i + 1}`}
-              style={{
-                width: 10,
-                height: 10,
-                borderRadius: "50%",
-                border: 0,
-                background: i === index ? "#fff" : "rgba(255,255,255,.6)",
-                cursor: "pointer",
-              }}
-            />
+    <div className="col tilt-right">
+      <div className={`track ${animClass}`} style={{ ["--speed"]: `${speed}s` }}>
+        <div className="stack">
+          {imgs.map((n, i) => (
+            <div className="rect" key={`A-${i}`}>
+              <Image src={src(n)} alt={`img-${n}`} />
+            </div>
           ))}
         </div>
-      </section>
-
-      {/* ====== BLUE PROMO (inside Hero) ====== */}
-      <section
-        style={{
-          background: "linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%)",
-          color: "#fff",
-          textAlign: "center",
-          padding: "64px 20px",
-        }}
-      >
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <h2 style={{ fontSize: 44, fontWeight: 800, marginBottom: 18 }}>
-            Best Printer for Home &amp; Office
-          </h2>
-
-          <p style={{ fontSize: 18, lineHeight: 1.7, marginBottom: 28 }}>
-            Whether you're printing family photos at home or handling daily business
-            documents, we've got the HP printers and supplies you need. From wireless
-            home models to heavy-duty office machines, plus all the ink and paper to
-            keep them running smoothly.
-          </p>
-
-          <div className="d-flex justify-content-center flex-wrap gap-3">
-            <button
-              className="btn"
-              style={{
-                background: "#fff",
-                color: "#2563eb",
-                fontWeight: 600,
-                borderRadius: 8,
-                padding: "12px 20px",
-                minWidth: 220,
-              }}
-            >
-              Shop Home Printers
-            </button>
-            <button
-              className="btn"
-              style={{
-                background: "#fff",
-                color: "#2563eb",
-                fontWeight: 600,
-                borderRadius: 8,
-                padding: "12px 20px",
-                minWidth: 220,
-              }}
-            >
-              Browse Office Solutions
-            </button>
-          </div>
+        <div className="stack">
+          {imgs.map((n, i) => (
+            <div className="rect" key={`B-${i}`}>
+              <Image src={src(n)} alt={`img-${n}`} />
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
     </div>
   );
-};
+}
 
-export default Hero;
+export default function Hero() {
+  return (
+    <section className="hero-root">
+      <Container fluid className="hero-stage">
+        {/* Overlay */}
+        <div className="gradient-overlay"></div>
+
+  <div style={{position: 'absolute', left: '10%', top: '50px', zIndex: 10, maxWidth: '400px'}}>
+  <h1 style={{color: '#fff', fontSize: '3.3rem', fontWeight: '700', marginBottom: '0.85rem', lineHeight: '1.15'}}>
+      Grow Your Business<br />
+      with DigiSpark
+    </h1>
+  <p style={{color: '#eee', fontSize: '1.02rem', lineHeight: '1.5'}}>Unlock the power of digital marketing with innovative strategies tailored for your brand. From SEO to Social Media, DigiSpark helps you reach, engage, and convert your audience for real results.</p>
+    <a href="#quote" style={{
+      display: 'inline-block',
+      marginTop: '0.93rem',
+      padding: '0.72rem 1.87rem',
+      fontSize: '1.06rem',
+      fontWeight: '600',
+      color: '#fff',
+      background: 'linear-gradient(90deg, #7c3aed 0%, #4761ff 100%)',
+      borderRadius: '0px',
+      boxShadow: '0 4px 24px rgba(76, 61, 255, 0.18)',
+      textDecoration: 'none',
+      transition: 'background 0.2s, transform 0.2s',
+      letterSpacing: '0.5px',
+      marginBottom: '2.2rem', // extra gap below button
+    }}
+    onMouseOver={e => e.currentTarget.style.background = 'linear-gradient(90deg, #4761ff 0%, #7c3aed 100%)'}
+    onMouseOut={e => e.currentTarget.style.background = 'linear-gradient(90deg, #7c3aed 0%, #4761ff 100%)'}
+    >Request a Quote</a>
+  </div>
+
+        <div className="columns-wrap">
+          <Column imgs={leftImgs}   speed={26} direction="down" />
+          <Column imgs={middleImgs} speed={22} direction="up"   />
+          <Column imgs={rightImgs}  speed={26} direction="down" />
+        </div>
+      </Container>
+      <BrandScroll />
+
+      <style>{`
+        :root{
+          --gap: 15px;
+          --card-w: 293px;
+          --card-h: 168px;
+          --tilt: 10deg;
+        }
+
+        * { box-sizing: border-box; }
+
+        .hero-root{
+          background:#f6f7f9;
+          display:flex;
+          flex-direction:column;
+          overflow:hidden;
+        }
+
+        .hero-stage{
+          position:relative;
+          height:100vh; width:100%;
+          display:flex;
+          justify-content:flex-end;
+          align-items:stretch;
+          overflow:hidden;
+        }
+
+      .gradient-overlay{
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:5;
+  pointer-events:none;
+  background: linear-gradient(
+    to right,
+    rgba(32,1,34,0.95),   /* deep purple, almost solid */
+    rgba(111,0,0,0.4)     /* deep red, still visible not transparent */
+  );
+}
+
+
+
+        .columns-wrap{
+          display:flex;
+          gap:var(--gap);
+          margin-right:5%;
+          transform: translateX(20%);
+          height:100%;
+          position:relative;
+          z-index:1;
+        }
+
+        .col{
+          display:flex;
+          flex-direction:column;
+          transform: rotate(var(--tilt));
+          overflow:hidden;
+          height:120vh;
+          top:-10vh;
+          position:relative;
+        }
+
+        .track{
+          display:flex;
+          flex-direction:column;
+          will-change: transform;
+          transform: translate3d(0,0,0);
+          backface-visibility: hidden;
+        }
+
+        .stack{ display:flex; flex-direction:column; }
+
+        .rect{
+          width:var(--card-w);
+          height:var(--card-h);
+          border:2px solid #333;
+          border-radius:6px;
+          overflow:hidden;
+          background:#eee;
+          box-shadow:0 6px 18px rgba(0,0,0,.15);
+          flex:0 0 auto;
+          margin-bottom: var(--gap);
+        }
+
+        .rect img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+        .track.scroll-up{ animation: scrollUp var(--speed) linear infinite; }
+        .track.scroll-down{ animation: scrollDown var(--speed) linear infinite; }
+
+        @keyframes scrollUp{
+          0%{ transform: translate3d(0,0,0); }
+          100%{ transform: translate3d(0,-50%,0); }
+        }
+        @keyframes scrollDown{
+          0%{ transform: translate3d(0,-50%,0); }
+          100%{ transform: translate3d(0,0,0); }
+        }
+
+        @media (max-width: 991px){
+          .hero-stage{ justify-content:center; }
+          .columns-wrap{ transform:none; margin-right:0; gap:var(--gap); height:100%; }
+          .col{ transform:none; height:100%; }
+          .track{ animation-duration:18s; }
+          .rect{ width:min(92vw,360px); height:150px; margin-bottom:var(--gap); }
+        }
+      `}</style>
+    </section>
+  );
+}
