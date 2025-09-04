@@ -19,7 +19,7 @@ export default function Header() {
           <div className="ff-logo">
             <span className="ff-logo-mark" />
           </div>
-          <span className="ff-name">DigiSpark</span>
+          <span className="ff-name">Digital Rise</span>
         </Link>
 
         {/* Mobile hamburger */}
@@ -35,12 +35,12 @@ export default function Header() {
 
         {/* Center: Nav */}
           <nav className={`ff-nav ${open ? "show" : ""}`}>
-            <Link to="/seo" className="ff-link">SEO</Link>
-            <Link to="/social-media" className="ff-link">Social Media Marketing</Link>
-            <Link to="/content-marketing" className="ff-link">Content Marketing</Link>
-            <Link to="/email-marketing" className="ff-link">Email Marketing</Link>
-            <Link to="/ppc" className="ff-link">PPC</Link>
-            <Link to="/analytics" className="ff-link">Analytics</Link>
+            <Link to="/SearchEngineOptimization" className="ff-link">SEO</Link>
+            <Link to="/SocialMediaMarketing" className="ff-link">Social Media Marketing</Link>
+            <Link to="/WebDevelopmentService" className="ff-link">Web Development</Link>
+            <Link to="/EmailMarketing" className="ff-link">Email Marketing</Link>
+            <Link to="/PayPerClickMarketing" className="ff-link">PPC</Link>
+            <Link to="/AnalyticsDashboard" className="ff-link">Analytics</Link>
           </nav>
 
         {/* Right: Actions */}

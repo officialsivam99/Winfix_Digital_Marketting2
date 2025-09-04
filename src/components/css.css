@@ -72,3 +72,12 @@
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
+/* Ensure footer is always visible and above brand-scroll section */
+.footer-root, footer {
+  position: relative;
+  z-index: 100;
+  width: 100%;
+  background: #0b0b12;
+  color: #fff;
+}

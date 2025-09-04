@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Header from "./header";
 
 const ShopByCategory = () => {
   const BLUE = "#2563eb";
