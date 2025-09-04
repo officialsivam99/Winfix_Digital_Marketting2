@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/officialsivam99/Winfix_Digital_Marketting2/static/css/main.b58a09d1.css",
+    "main.js": "/officialsivam99/Winfix_Digital_Marketting2/static/js/main.e28325b9.js",
+    "static/media/fa-solid-900.ttf": "/officialsivam99/Winfix_Digital_Marketting2/static/media/fa-solid-900.4a2cd718d7031b732e76.ttf",
+    "static/media/fa-brands-400.ttf": "/officialsivam99/Winfix_Digital_Marketting2/static/media/fa-brands-400.150de8eaa454d669c405.ttf",
+    "static/media/bootstrap-icons.woff?": "/officialsivam99/Winfix_Digital_Marketting2/static/media/bootstrap-icons.1295669cd4e305c97f2c.woff",
+    "static/media/fa-solid-900.woff2": "/officialsivam99/Winfix_Digital_Marketting2/static/media/fa-solid-900.bb975c966c37455a1bc3.woff2",
+    "static/media/bootstrap-icons.woff2?": "/officialsivam99/Winfix_Digital_Marketting2/static/media/bootstrap-icons.92ea18a81d737146ff04.woff2",
+    "static/media/fa-brands-400.woff2": "/officialsivam99/Winfix_Digital_Marketting2/static/media/fa-brands-400.e033a13ee751afc1860c.woff2",
+    "static/media/fa-regular-400.ttf": "/officialsivam99/Winfix_Digital_Marketting2/static/media/fa-regular-400.d87474231f4192884802.ttf",
+    "static/media/carousel-2.jpg": "/officialsivam99/Winfix_Digital_Marketting2/static/media/carousel-2.197592f92e707a9f2008.jpg",
+    "static/media/carousel-1.jpg": "/officialsivam99/Winfix_Digital_Marketting2/static/media/carousel-1.b7f40bb6af0530196d6e.jpg",
+    "static/media/team-2.jpg": "/officialsivam99/Winfix_Digital_Marketting2/static/media/team-2.a76b9939d140923ac491.jpg",
+    "static/media/about.jpg": "/officialsivam99/Winfix_Digital_Marketting2/static/media/about.f6b2b864181f37517016.jpg",
+    "static/media/team-3.jpg": "/officialsivam99/Winfix_Digital_Marketting2/static/media/team-3.121802cb5a2f17ceb575.jpg",
+    "static/media/team-1.jpg": "/officialsivam99/Winfix_Digital_Marketting2/static/media/team-1.78de05851a957f8ea965.jpg",
+    "static/media/project-2.jpg": "/officialsivam99/Winfix_Digital_Marketting2/static/media/project-2.73c120ddb92e485ebfcd.jpg",
+    "static/media/team-4.jpg": "/officialsivam99/Winfix_Digital_Marketting2/static/media/team-4.ed72b9cd32216cd4d392.jpg",
+    "static/media/project-3.jpg": "/officialsivam99/Winfix_Digital_Marketting2/static/media/project-3.d4bdd4814117a841fad3.jpg",
+    "static/media/fa-regular-400.woff2": "/officialsivam99/Winfix_Digital_Marketting2/static/media/fa-regular-400.3223dc79c1adee56370b.woff2",
+    "static/media/project-1.jpg": "/officialsivam99/Winfix_Digital_Marketting2/static/media/project-1.5fe9c8516f994ed750d3.jpg",
+    "static/media/project-4.jpg": "/officialsivam99/Winfix_Digital_Marketting2/static/media/project-4.164e0ff6b62dda912813.jpg",
+    "static/media/fa-v4compatibility.ttf": "/officialsivam99/Winfix_Digital_Marketting2/static/media/fa-v4compatibility.0e3a648be390bd8cb094.ttf",
+    "static/media/fa-v4compatibility.woff2": "/officialsivam99/Winfix_Digital_Marketting2/static/media/fa-v4compatibility.68577e40f3e70067b5da.woff2",
+    "index.html": "/officialsivam99/Winfix_Digital_Marketting2/index.html",
+    "main.b58a09d1.css.map": "/officialsivam99/Winfix_Digital_Marketting2/static/css/main.b58a09d1.css.map",
+    "main.e28325b9.js.map": "/officialsivam99/Winfix_Digital_Marketting2/static/js/main.e28325b9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b58a09d1.css",
+    "static/js/main.e28325b9.js"
+  ]
+}
