@@ -385,7 +385,7 @@ export default function PostHeroSection() {
                          style={{ background: theme.grad, borderRadius: 12, width: 56, height: 56 }}>
                       <i className={`bi ${s.icon} fs-5`} />
                     </div>
-                  </div>
+                  </Card.Body>
                 </Card>
               </Col>
             ))}
