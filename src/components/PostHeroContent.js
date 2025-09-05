@@ -1,8 +1,8 @@
 // src/components/PostHeroSection.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Container, Row, Col, Card, Button, Badge, Stack, Image,
-  Modal, Form, Table, Accordion, Alert
+  Modal, Form, Table, Accordion, Alert, Carousel, CloseButton
 } from "react-bootstrap";
 
 export default function PostHeroSection() {
@@ -142,11 +142,70 @@ export default function PostHeroSection() {
     { q: "How do you measure success?", a: "Revenue, ROAS/CAC, conversion rate, LTV/cohorts, and channel KPIs." },
   ];
 
+  /* ===================== NEW DATA (for added sections) ===================== */
+  const marqueeWins = [
+    { k: "+218%", v: "Organic clicks", s: "90 days" },
+    { k: "3.4×",  v: "ROAS on META", s: "PMax assist" },
+    { k: "-42%",  v: "CPA drop", s: "Paid Search" },
+    { k: "+68%",  v: "Email rev share", s: "Flows" },
+    { k: "92%",   v: "CWV score", s: "Core Web Vitals" },
+    { k: "+2.1%", v: "CR uplift", s: "CRO sprints" },
+  ];
+
+  const testimonials = [
+    {
+      quote: "They ship every week. We finally have a clean growth loop—ads, landing pages, and analytics working together.",
+      name: "Priya Sharma",
+      role: "Head of Growth, D2C",
+      img: "https://i.pravatar.cc/120?img=5",
+    },
+    {
+      quote: "Attribution went from guesswork to clarity. Our CAC is stable and creative testing is painless now.",
+      name: "Arjun Mehta",
+      role: "Founder, SaaS",
+      img: "https://i.pravatar.cc/120?img=11",
+    },
+    {
+      quote: "The SEO roadmap + technical fixes moved the needle fast. We saw compounding gains within two months.",
+      name: "Neha Gupta",
+      role: "Marketing Lead, Marketplace",
+      img: "https://i.pravatar.cc/120?img=21",
+    },
+  ];
+
+  const studies = [
+    {
+      tag: "PPC • CRO",
+      title: "Fintech Leads at 38% Lower CPA",
+      img: "https://picsum.photos/seed/cs1/1200/800",
+      bullets: ["Creative matrix", "PMax guardrails", "Funnel-specific LPs"],
+    },
+    {
+      tag: "SEO • Content",
+      title: "SaaS Trials +162% with Topic Clusters",
+      img: "https://picsum.photos/seed/cs2/1200/800",
+      bullets: ["Entity mapping", "Internals", "Programmatic pages"],
+    },
+    {
+      tag: "Analytics",
+      title: "Looker Boards for Real-Time ROAS",
+      img: "https://picsum.photos/seed/cs3/1200/800",
+      bullets: ["Event spec", "BigQuery", "LTV cohorts"],
+    },
+  ];
+
+  const posts = [
+    { title: "Airtight Event Specs: Stop Losing Data", tag: "Analytics", img: "https://picsum.photos/seed/b1/1200/800" },
+    { title: "CRO Checklist for D2C PDPs", tag: "CRO", img: "https://picsum.photos/seed/b2/1200/800" },
+    { title: "SEO Topic Clusters that Actually Scale", tag: "SEO", img: "https://picsum.photos/seed/b3/1200/800" },
+  ];
+
   /* ===================== STATE ===================== */
   const [hoverIdx, setHoverIdx] = useState(null);
   const [serviceModal, setServiceModal] = useState(null);
   const [quoteMsg, setQuoteMsg] = useState("");
   const [billing, setBilling] = useState("Monthly"); // 'Monthly' | 'Yearly (-15%)'
+  const [showSticky, setShowSticky] = useState(true);
 
   const priceLabel = (p) => {
     if (p === 0) return "Custom";
@@ -239,7 +298,7 @@ export default function PostHeroSection() {
         </Container>
       </section>
 
-      {/* SERVICES (no angled separator; improved gradient border & hover) */}
+      {/* SERVICES */}
       <section style={sectionAlt}>
         <SectionHeader eyebrow="What we do" title="End-to-end growth services" subtitle="Build, grow, and measure—one accountable team." />
         <Container>
@@ -250,7 +309,7 @@ export default function PostHeroSection() {
                   style={{ ...gradBorder, overflow: "hidden", boxShadow: "0 16px 40px rgba(2,6,23,0.08)" }}
                   onMouseEnter={() => setHoverIdx(i)}
                   onMouseLeave={() => setHoverIdx(null)}
-                  className="h-100"
+                  className="h-100 reveal"
                 >
                   <div className="ratio ratio-16x9">
                     <Image
@@ -284,7 +343,6 @@ export default function PostHeroSection() {
             ))}
           </Row>
         </Container>
-        {/* Hairline divider instead of angled separator */}
         <Divider />
       </section>
 
@@ -295,7 +353,7 @@ export default function PostHeroSection() {
           <Row className="g-4">
             {showcase.map((it, i) => (
               <Col md={6} lg={4} key={i}>
-                <div style={{ position: "relative", borderRadius: 16, overflow: "hidden", border: "1px solid #ecebfd", boxShadow: "0 20px 46px rgba(2,6,23,.18)" }}>
+                <div style={{ position: "relative", borderRadius: 16, overflow: "hidden", border: "1px solid #ecebfd", boxShadow: "0 20px 46px rgba(2,6,23,.18)" }} className="reveal">
                   <Image src={it.img} alt={it.title} className="w-100" style={{ display: "block" }} />
                   <div className="hover-overlay-pro">
                     <div style={{ ...darkGlass, padding: 14 }}>
@@ -313,14 +371,14 @@ export default function PostHeroSection() {
         </Container>
       </section>
 
-      {/* PROCESS (no angled separator; added connecting line visual within cards) */}
+      {/* PROCESS */}
       <section style={sectionAlt}>
         <SectionHeader eyebrow="Process" title="Simple, fast, accountable" />
         <Container>
           <Row className="g-4">
             {steps.map((s, i) => (
               <Col md={6} lg={3} key={i}>
-                <Card style={{ ...glassCard, position: "relative" }} className="h-100">
+                <Card style={{ ...glassCard, position: "relative" }} className="h-100 reveal">
                   <span className="timeline-dot" />
                   <Card.Body>
                     <div className="d-inline-flex align-items-center justify-content-center text-white"
@@ -360,7 +418,7 @@ export default function PostHeroSection() {
                     background: "linear-gradient(#fff,#fff) padding-box, linear-gradient(135deg, #7c3aed 0%, #4761ff 50%, #ff4d8d 100%) border-box",
                     boxShadow: p.popular ? "0 20px 54px rgba(124,58,237,.25)" : "0 14px 46px rgba(2,6,23,.12)",
                   }}
-                  className="h-100"
+                  className="h-100 reveal"
                 >
                   <Card.Body>
                     {p.popular && (
@@ -400,6 +458,111 @@ export default function PostHeroSection() {
           </Accordion>
         </Container>
       </section>
+
+      {/* ===================== 🔥 NEW SECTIONS START ===================== */}
+
+      {/* RESULTS MARQUEE (auto-scrolling wins) */}
+      <section style={{ ...section, padding: "32px 0" }}>
+        <Container>
+          <div className="marquee-wrap">
+            <div className="marquee-track">
+              {[...marqueeWins, ...marqueeWins].map((w, i) => (
+                <div key={i} className="marquee-item">
+                  <span className="kpi-val">{w.k}</span>
+                  <span className="kpi-lbl">{w.v}</span>
+                  <span className="kpi-sub">{w.s}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* TESTIMONIALS (auto-play, pause on hover) */}
+      <section style={sectionAlt}>
+        <SectionHeader eyebrow="What clients say" title="Testimonials" />
+        <Container>
+          <Carousel className="reveal" interval={4500} pause="hover" controls indicators>
+            {testimonials.map((t, i) => (
+              <Carousel.Item key={i}>
+                <Row className="justify-content-center">
+                  <Col md={9} lg={8}>
+                    <Card style={glassCard}>
+                      <Card.Body className="p-4">
+                        <div className="d-flex align-items-center gap-3">
+                          <Image roundedCircle src={t.img} alt={t.name} width={60} height={60} />
+                          <div>
+                            <div className="fw-semibold">{t.name}</div>
+                            <div className="small text-secondary">{t.role}</div>
+                          </div>
+                        </div>
+                        <p className="mt-3 mb-0 fs-6" style={{ color: "#111827" }}>
+                          “{t.quote}”
+                        </p>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                </Row>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        </Container>
+      </section>
+
+      {/* CASE STUDIES SPLIT */}
+      <section style={section}>
+        <SectionHeader eyebrow="Case studies" title="Proven playbooks" subtitle="A snapshot of recent outcomes." />
+        <Container>
+          <Row className="g-4">
+            {studies.map((c, i) => (
+              <Col md={6} lg={4} key={i}>
+                <Card className="h-100 cs-card reveal" style={{ border: "1px solid #ecebfd", borderRadius: 16, overflow: "hidden" }}>
+                  <div className="ratio ratio-16x9">
+                    <Image src={c.img} alt={c.title} className="w-100 h-100" style={{ objectFit: "cover" }} />
+                  </div>
+                  <Card.Body>
+                    <div className="small text-uppercase text-secondary">{c.tag}</div>
+                    <h6 className="mt-1">{c.title}</h6>
+                    <ul className="small text-secondary mb-3">
+                      {c.bullets.map((b, idx) => <li key={idx}>{b}</li>)}
+                    </ul>
+                    <a href="#quote" className="btn btn-sm btn-dark">
+                      Get the playbook
+                    </a>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+
+      {/* INSIGHTS / BLOG GRID */}
+      <section style={sectionAlt}>
+        <SectionHeader eyebrow="Insights" title="Ideas & resources" />
+        <Container>
+          <Row className="g-4">
+            {posts.map((p, i) => (
+              <Col md={6} lg={4} key={i}>
+                <Card className="reveal blog-card" style={{ ...glassCard, overflow: "hidden" }}>
+                  <div className="ratio ratio-16x9">
+                    <Image src={p.img} alt={p.title} className="w-100 h-100" style={{ objectFit: "cover" }} />
+                  </div>
+                  <Card.Body>
+                    <Badge bg="light" text="dark" className="mb-2">{p.tag}</Badge>
+                    <h6 className="mb-2">{p.title}</h6>
+                    <a href="#quote" className="btn btn-sm" style={ghostBtn}>
+                      Request a PDF copy
+                    </a>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+
+      {/* ===================== 🔥 NEW SECTIONS END ===================== */}
 
       {/* QUOTE (anchor for hero button) — premium dark block */}
       <section id="quote" style={{ ...section, background: theme.darkBg }}>
@@ -504,6 +667,22 @@ export default function PostHeroSection() {
         </Modal.Footer>
       </Modal>
 
+      {/* STICKY CONTACT BAR (dismissible) */}
+      {showSticky && (
+        <div className="sticky-bar">
+          <div className="container d-flex align-items-center justify-content-between gap-2">
+            <div className="d-flex align-items-center gap-2">
+              <span className="pulse-dot" />
+              <span className="small">Free teardown: get a 10-point growth audit within 48h.</span>
+            </div>
+            <div className="d-flex align-items-center gap-2">
+              <a href="#quote" className="btn btn-sm btn-light">Get Free Audit</a>
+              <CloseButton onClick={() => setShowSticky(false)} />
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Local premium effects */}
       <style>{`
         .brand-chip:hover .brand-logo{ filter:none; opacity:1; }
@@ -534,7 +713,67 @@ export default function PostHeroSection() {
           background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 40 40"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.9"/></svg>');
           mix-blend-mode: soft-light;
         }
+
+        /* ===== New: Results marquee ===== */
+        .marquee-wrap{
+          overflow: hidden;
+          border: 1px solid #ecebfd;
+          border-radius: 14px;
+          background: #fff;
+          box-shadow: 0 8px 20px rgba(2,6,23,.06);
+        }
+        .marquee-track{
+          display: flex;
+          gap: 18px;
+          padding: 10px 14px;
+          animation: marquee 26s linear infinite;
+          will-change: transform;
+        }
+        .marquee-item{
+          display:flex; align-items:center; gap:8px;
+          padding: 10px 14px;
+          border: 1px solid #ecebfd;
+          border-radius: 999px;
+          background: linear-gradient(#fff,#fff) padding-box, linear-gradient(135deg,#7c3aed,#4761ff) border-box;
+        }
+        .marquee-item .kpi-val{ font-weight:700; }
+        .marquee-item .kpi-lbl{ color:#334155; }
+        .marquee-item .kpi-sub{ color:#64748b; font-size:.82rem; }
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+
+        /* ===== New: reveal on scroll ===== */
+        .reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        /* Blog/case hover */
+        .blog-card:hover, .cs-card:hover { transform: translateY(-4px); transition: transform .25s ease; }
+
+        /* Sticky CTA bar */
+        .sticky-bar{
+          position: sticky;
+          bottom: 0;
+          z-index: 1020;
+          background: linear-gradient(90deg, rgba(124,58,237,.95), rgba(71,97,255,.95));
+          color: #fff;
+          padding: 10px 0;
+          box-shadow: 0 -6px 18px rgba(2,6,23,.2);
+        }
+        .pulse-dot{
+          width:10px; height:10px; border-radius:50%; background:#22c55e; display:inline-block; position:relative;
+        }
+        .pulse-dot::after{
+          content:""; position:absolute; inset:-6px; border-radius:50%;
+          border:2px solid rgba(34,197,94,.5);
+          animation:pulse 1.6s infinite;
+        }
+        @keyframes pulse{ 0%{transform:scale(.6); opacity:.9} 100%{transform:scale(1.4); opacity:0} }
       `}</style>
+
+      {/* IntersectionObserver to add 'visible' class */}
+      <RevealOnScroll />
     </>
   );
 }
@@ -573,4 +812,22 @@ function DecorativeOrbs() {
 
 function NoiseOverlay() {
   return <div className="noise" style={{ position: "absolute", inset: 0 }} />;
+}
+
+/* Attach 'visible' to .reveal elements on scroll */
+function RevealOnScroll() {
+  const ref = useRef(null);
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) e.target.classList.add("visible");
+        });
+      }, { threshold: 0.12 }
+    );
+    const nodes = document.querySelectorAll(".reveal");
+    nodes.forEach(n => io.observe(n));
+    return () => io.disconnect();
+  }, []);
+  return null;
 }
