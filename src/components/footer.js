@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import {
   Container, Row, Col, Form, Button, InputGroup, Badge, Nav, Alert, Card
 } from "react-bootstrap";
+import { Link } from "react-router-dom"; // Add this import
 
 export default function Footer() {
   /* ===== Theme (inline) ===== */
@@ -121,7 +122,7 @@ export default function Footer() {
                     background: theme.grad,
                   }}
                 />
-                <div className="h4 mb-0">Print Mart Online</div>
+                <div className="h4 mb-0">Digital Rise</div>
               </div>
               <p className="small" style={{ color: theme.sub }}>
                 Full-stack digital growth—build, acquire, and measure.
@@ -175,7 +176,8 @@ export default function Footer() {
                       {items.map(([label, href]) => (
                         <Nav.Link
                           key={label}
-                          href={href}
+                          as={Link}
+                          to={href.replace('./', '/')} // Convert './PrivacyPolicy' to '/PrivacyPolicy'
                           className="px-0 py-1"
                           style={{ color: theme.sub }}
                         >
@@ -194,7 +196,7 @@ export default function Footer() {
               <div className="small" style={{ color: theme.sub }}>
                 <div className="mb-1"><i className="bi bi-geo-alt me-2" /> 221B Baker Street, Mumbai, IN</div>
                 <div className="mb-1"><i className="bi bi-telephone me-2" /> +91 90000 00000</div>
-                <div><i className="bi bi-envelope me-2" /> hello@printmartonline.com</div>
+                <div><i className="bi bi-envelope me-2" /> info@mydigitalrise.com</div>
               </div>
 
               <div className="fw-semibold mt-3 mb-2">Preferences</div>
@@ -235,7 +237,7 @@ export default function Footer() {
         <Container>
           <Row className="align-items-center gy-2">
             <Col md={4} className="small" style={{ color: theme.sub }}>
-              © {year} Print Mart Online — All rights reserved.
+              © {year} Digital Rise — All rights reserved.
             </Col>
             <Col md={4} className="text-md-center">
               <Button variant="outline-light" size="sm" onClick={backToTop}
