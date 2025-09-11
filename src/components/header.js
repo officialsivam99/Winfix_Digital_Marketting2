@@ -19,7 +19,7 @@ export default function Header() {
           <div className="ff-logo">
             <span className="ff-logo-mark" />
           </div>
-          <span className="ff-name">Digital Rise</span>
+          <span className="ff-name">Digital</span>
         </Link>
 
         {/* Mobile hamburger */}
