@@ -45,11 +45,9 @@ export default function Header() {
 
         {/* Right: Actions */}
         <div className="ff-actions">
-          <Link to="/login" className="ff-login">
-            Login
-          </Link>
+          
           <Link to="/demo" className="ff-btn ff-outline">
-            Request demo
+            Contact Us
           </Link>
           <Link to="/get-started" className="ff-btn ff-solid">
             Get started

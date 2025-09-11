@@ -371,23 +371,47 @@ export default function PostHeroSection() {
         </Container>
       </section>
 
-      {/* PROCESS */}
+      {/* PROCESS (icons and content center aligned in a row) */}
       <section style={sectionAlt}>
         <SectionHeader eyebrow="Process" title="Simple, fast, accountable" />
         <Container>
-          <Row className="g-4">
+          <Row className="g-4 justify-content-center">
             {steps.map((s, i) => (
               <Col md={6} lg={3} key={i}>
-                <Card style={{ ...glassCard, position: "relative" }} className="h-100 reveal">
-                  <span className="timeline-dot" />
-                  <Card.Body>
-                    <div className="d-inline-flex align-items-center justify-content-center text-white"
-                         style={{ background: theme.grad, borderRadius: 12, width: 56, height: 56 }}>
-                      <i className={`bi ${s.icon} fs-5`} />
+                <Card
+                  style={{
+                    borderRadius: 16,
+                    background: "#f6f7f9",
+                    border: "1px solid #ecebfd",
+                    boxShadow: "0 2px 12px rgba(44,62,80,0.07)",
+                    minHeight: 120,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: "24px 12px",
+                    textAlign: "left"
+                  }}
+                  className="h-100"
+                >
+                  <div className="d-flex align-items-center justify-content-center w-100">
+                    <div
+                      className="d-inline-flex align-items-center justify-content-center me-3 flex-shrink-0"
+                      style={{
+                        background: theme.grad,
+                        borderRadius: 12,
+                        width: 56,
+                        height: 56,
+                        color: "#fff",
+                        fontSize: 28
+                      }}
+                    >
+                      <i className={`bi ${s.icon}`} />
                     </div>
-                    <h6 className="mt-3 mb-1">{s.title}</h6>
-                    <p className="small mb-0" style={subText}>{s.text}</p>
-                  </Card.Body>
+                    <div>
+                      <h6 className="mb-2 fw-semibold" style={{ fontSize: "1.1rem" }}>{s.title}</h6>
+                      <p className="small mb-0" style={{ color: "#6b7280" }}>{s.text}</p>
+                    </div>
+                  </div>
                 </Card>
               </Col>
             ))}
