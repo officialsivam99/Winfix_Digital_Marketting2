@@ -182,7 +182,7 @@ export default function Terms() {
                   </li>
                   <li>
                     <strong>Terms and Conditions</strong> (also referred as “Terms”) mean these Terms and Conditions that
-                    form the entire agreement between you and the Company regarding the use of the Service. This agreement
+                    {/* form the entire agreement between you and the Company regarding the use of the Service. This agreement
                     references the{" "}
                     <a
                       className="ext"
@@ -191,7 +191,7 @@ export default function Terms() {
                       rel="noreferrer"
                     >
                       Free Terms and Conditions Generator
-                    </a>
+                    </a> */}
                     .
                   </li>
                   <li>

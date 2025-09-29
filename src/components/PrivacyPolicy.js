@@ -343,7 +343,7 @@ export default function PrivacyPolicy() {
                 </ul>
                 <p>
                   Cookies can be “Persistent” (remain when you go offline) or “Session” (deleted when you close your
-                  browser). Learn more about cookies in this{" "}
+                  {/* browser). Learn more about cookies in this{" "}
                   <a
                     className="ext"
                     href="https://www.freeprivacypolicy.com/blog/sample-privacy-policy-template/#Use_Of_Cookies_And_Tracking"
@@ -351,7 +351,7 @@ export default function PrivacyPolicy() {
                     rel="noreferrer"
                   >
                     Free Privacy Policy article
-                  </a>
+                  </a> */}
                   .
                 </p>
 

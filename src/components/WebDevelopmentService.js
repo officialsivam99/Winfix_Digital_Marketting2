@@ -8,13 +8,7 @@ import Header from "./header";
 
 /**
  * WebDevelopmentService (React-Bootstrap Only)
- * --------------------------------------------
- * Drop-in page for your Digi Spark web development service.
- * - Responsive, long-form, minimal, conversion-focused
- * - No Tailwind; only Bootstrap + React-Bootstrap + Bootstrap Icons
- *
- * Usage:
- * <WebDevelopmentService brand="Digi Spark" />
+ * USD version — prices & budget label updated
  */
 
 export default function WebDevelopmentService({ brand = "Digi Spark", onPrimaryCTA }) {
@@ -121,10 +115,11 @@ export default function WebDevelopmentService({ brand = "Digi Spark", onPrimaryC
     },
   ];
 
+  // ---- USD PRICING ----
   const plans = [
     {
       name: "Starter Site",
-      price: "₹29,000",
+      price: "$330",
       desc: "Launch-ready 5-7 page website for new brands and SMEs.",
       highlights: ["Responsive UI", "Contact forms", "Basic SEO", "Analytics"],
       cta: "Get Starter",
@@ -132,7 +127,7 @@ export default function WebDevelopmentService({ brand = "Digi Spark", onPrimaryC
     },
     {
       name: "Growth Web App",
-      price: "₹89,000",
+      price: "$1,011",
       desc: "Custom Next/MERN app with CMS & integrations.",
       highlights: ["Auth & roles", "Dashboards", "Headless CMS", "Stripe/Payments"],
       cta: "Scale with Us",
@@ -553,7 +548,8 @@ export default function WebDevelopmentService({ brand = "Digi Spark", onPrimaryC
                       </Col>
                       <Col sm={6}>
                         <Form.Group>
-                          <Form.Label className="small">Budget (₹)</Form.Label>
+                          {/* UPDATED: currency label */}
+                          <Form.Label className="small">Budget (USD)</Form.Label>
                           <Form.Control type="number" min={0} />
                         </Form.Group>
                       </Col>

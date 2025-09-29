@@ -19,6 +19,8 @@ import WhatWeDoSection from "./components/WhatWeDoSection"
 import HowWeWork from "./components/HowWeWork"
 import TailoredSolutions from "./components/TailoredSolutions"
 import Terms from "./components/Terms"
+import HeroSection from "./components/HeroSection"
+import PrintCare from "./components/print-assist"
 
 
 
@@ -39,7 +41,8 @@ function App() {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/Terms" element={<Terms />} />
         <Route path="/ReturnRefund" element={<ReturnRefund/>} />
-
+        <Route path="/HeroSection" element={<HeroSection />} />
+        <Route path="/print-assist" element={<PrintCare />} />
 
         {/* Add more routes as needed */}
       </Routes>

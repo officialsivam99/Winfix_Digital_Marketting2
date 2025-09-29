@@ -191,26 +191,24 @@ export default function AnalyticsService({
     },
   ];
 
-  // Replace the old faqs with this
-const faqs = [
-  {
-    q: "Can you connect GA4, ad platforms, and our CRM?",
-    a: "Yes. We connect GA4 with Google Ads/Meta and your CRM or offline conversions to build revenue-aligned reporting and attribution."
-  },
-  {
-    q: "Do we need server-side tagging?",
-    a: "It’s recommended for higher spend or privacy-sensitive brands. Server-side tagging reduces data loss and improves attribution quality."
-  },
-  {
-    q: "How many dashboards do we get?",
-    a: "The Growth plan includes three Looker Studio dashboards (Acquisition, Revenue, Cohorts). We can add more on request."
-  },
-  {
-    q: "How long until we go live?",
-    a: "Starter typically 1–2 weeks. Growth 3–4 weeks including QA, validation, and handover/training."
-  }
-];
-
+  const faqs = [
+    {
+      q: "Can you connect GA4, ad platforms, and our CRM?",
+      a: "Yes. We connect GA4 with Google Ads/Meta and your CRM or offline conversions to build revenue-aligned reporting and attribution."
+    },
+    {
+      q: "Do we need server-side tagging?",
+      a: "It’s recommended for higher spend or privacy-sensitive brands. Server-side tagging reduces data loss and improves attribution quality."
+    },
+    {
+      q: "How many dashboards do we get?",
+      a: "The Growth plan includes three Looker Studio dashboards (Acquisition, Revenue, Cohorts). We can add more on request."
+    },
+    {
+      q: "How long until we go live?",
+      a: "Starter typically 1–2 weeks. Growth 3–4 weeks including QA, validation, and handover/training."
+    }
+  ];
 
   /* ============== UI State & Handlers ============== */
   const [hoverIdx, setHoverIdx] = useState(null);
@@ -264,7 +262,21 @@ const faqs = [
     );
   };
 
-  /* ============== ROI Uplift Calculator ============== */
+  const formatKpiVal = (label, val) => {
+    const isNum = typeof val === "number" && !isNaN(val);
+    if (!isNum) return val;
+    const isTime = /hrs|days/i.test(label);
+    if (isTime) {
+      return `${val}${label.includes("hrs") ? " hrs" : " days"}`;
+    }
+    // for non-time KPIs, show as percentage unless label already contains %
+    return `${val}${label.includes("%") ? "" : "%"}`;
+  };
+
+  const fmt = (n, currency = "INR", locale = "en-IN") =>
+    new Intl.NumberFormat(locale, { style: "currency", currency, maximumFractionDigits: 0 }).format(n);
+
+  /* ============== ROI Uplift Calculator (uses baseCVR) ============== */
   const [roi, setRoi] = useState({
     monthlyRevenue: 1200000,  // ₹
     adSpend: 400000,          // ₹
@@ -274,13 +286,22 @@ const faqs = [
   });
 
   const roiOut = useMemo(() => {
-    const rev = +roi.monthlyRevenue || 0;
-    const spend = +roi.adSpend || 0;
+    const rev = Math.max(+roi.monthlyRevenue || 0, 0);
+    const spend = Math.max(+roi.adSpend || 0, 0);
+    const baseCVR = Math.max(+roi.baseCVR || 0, 0);
+    const uplift = Math.max(+roi.upliftCVR || 0, 0) / 100;
+    const cutCAC = Math.max(+roi.reduceCAC || 0, 0) / 100;
+
     const roasBase = spend ? rev / spend : 0;
-    const revUplift = rev * (+roi.upliftCVR / 100);
+
+    // Treat uplift as relative CVR lift → revenue scales with CVR
+    const newCVR = baseCVR * (1 + uplift);
+    const revUplift = baseCVR > 0 ? rev * (newCVR / baseCVR - 1) : rev * uplift;
+
     const newRev = rev + revUplift;
-    const newSpend = spend * (1 - (+roi.reduceCAC / 100));
+    const newSpend = spend * (1 - cutCAC);
     const roasNew = newSpend ? newRev / newSpend : 0;
+
     return {
       roasBase: roasBase.toFixed(2),
       roasNew: roasNew.toFixed(2),
@@ -290,16 +311,14 @@ const faqs = [
     };
   }, [roi]);
 
-  /* ============== Attribution Mixer ============== */
-  const [attr, setAttr] = useState({
-    lastClick: 40, dataDriven: 35, firstClick: 25
-  });
-  const totalAttr = attr.lastClick + attr.dataDriven + attr.firstClick;
-  const normalized = {
-    lastClick: Math.round((attr.lastClick / totalAttr) * 100),
-    dataDriven: Math.round((attr.dataDriven / totalAttr) * 100),
-    firstClick: Math.round(100 - (attr.lastClick / totalAttr) * 100 - (attr.dataDriven / totalAttr) * 100),
-  };
+  /* ============== Attribution Mixer (normalized to 100%) ============== */
+  const [attr, setAttr] = useState({ lastClick: 40, dataDriven: 35, firstClick: 25 });
+  const total = attr.lastClick + attr.dataDriven + attr.firstClick || 1;
+  const nLast = Math.round((attr.lastClick / total) * 100);
+  const nData = Math.round((attr.dataDriven / total) * 100);
+  const nFirst = Math.max(0, 100 - nLast - nData);
+  const normalized = { lastClick: nLast, dataDriven: nData, firstClick: nFirst };
+
   const roasImpact = useMemo(() => {
     // toy model: better models (dataDriven/firstClick) add lift
     const lift = (normalized.dataDriven * 0.01 * 0.2) + (normalized.firstClick * 0.01 * 0.1);
@@ -349,7 +368,7 @@ const faqs = [
                 <div className="ratio ratio-16x9">
                   <img
                     src={hero.image}
-                    alt="Analytics dashboard"
+                    alt="GA4, attribution & revenue dashboard overview"
                     className="w-100 h-100"
                     style={{ objectFit: "cover" }}
                   />
@@ -366,8 +385,7 @@ const faqs = [
                   <Card.Body className="py-3">
                     <div className="small" style={subText}>{k.label}</div>
                     <div className="fs-5 fw-semibold">
-                      {typeof k.value === "number" ? (k.invert ? k.value : `${k.value}${k.label.includes("%") ? "" : (k.label.includes("hrs") || k.label.includes("days")) ? "" : "%"}`
-                      ) : k.value}
+                      {formatKpiVal(k.label, k.value)}
                     </div>
                     <div className="d-flex justify-content-center mt-1">
                       <Spark data={k.trend} color={k.invert ? "#b45309" : "#111827"} />
@@ -556,8 +574,8 @@ const faqs = [
                       <tr>
                         <td>{roiOut.roasBase}×</td>
                         <td>{roiOut.roasNew}×</td>
-                        <td>₹{roiOut.revUplift.toLocaleString()}</td>
-                        <td>₹{roiOut.newSpend.toLocaleString()}</td>
+                        <td>{fmt(roiOut.revUplift)}</td>
+                        <td>{fmt(roiOut.newSpend)}</td>
                         <td>{roiOut.deltaRoas}×</td>
                       </tr>
                     </tbody>
@@ -575,17 +593,23 @@ const faqs = [
                   <Row className="g-3 mt-2">
                     <Col xs={12}>
                       <Form.Label className="small">Last Click: {normalized.lastClick}%</Form.Label>
-                      <Form.Range min={10} max={70} value={attr.lastClick}
+                      <Form.Range
+                        aria-label="Adjust Last Click attribution"
+                        min={10} max={70} value={attr.lastClick}
                         onChange={(e)=>setAttr(v=>({...v, lastClick:+e.target.value}))}/>
                     </Col>
                     <Col xs={12}>
                       <Form.Label className="small">Data-Driven: {normalized.dataDriven}%</Form.Label>
-                      <Form.Range min={10} max={70} value={attr.dataDriven}
+                      <Form.Range
+                        aria-label="Adjust Data-Driven attribution"
+                        min={10} max={70} value={attr.dataDriven}
                         onChange={(e)=>setAttr(v=>({...v, dataDriven:+e.target.value}))}/>
                     </Col>
                     <Col xs={12}>
                       <Form.Label className="small">First Click: {normalized.firstClick}%</Form.Label>
-                      <Form.Range min={5} max={60} value={attr.firstClick}
+                      <Form.Range
+                        aria-label="Adjust First Click attribution"
+                        min={5} max={60} value={attr.firstClick}
                         onChange={(e)=>setAttr(v=>({...v, firstClick:+e.target.value}))}/>
                     </Col>
                   </Row>

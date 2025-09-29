@@ -18,18 +18,9 @@ import WeekCalendarSection from "./WeekCalendarSection";
 import Header from "./header";
 
 /**
- * Digi Spark — Social Media Marketing (React‑Bootstrap Only)
+ * Digi Spark — Social Media Marketing (React-Bootstrap Only)
  * ---------------------------------------------------------
- * A long, dynamic, conversion‑ready SMM page for your Digi Spark site.
- * Everything is data‑driven via arrays so you can edit quickly.
- * Uses only Bootstrap 5, React‑Bootstrap, and Bootstrap Icons.
- *
- * Usage:
- * 1) Make sure you import the styles once in your app:
- *    import 'bootstrap/dist/css/bootstrap.min.css';
- *    import 'bootstrap-icons/font/bootstrap-icons.css';
- *    import './App.css'; // add helpers from bottom comment
- * 2) <SocialMediaMarketing brand="Digi Spark" />
+ * USD version: plans + KPI currency + form label updated
  */
 
 export default function SocialMediaMarketing({ brand = "Digi Spark", onPrimaryCTA }) {
@@ -51,9 +42,9 @@ export default function SocialMediaMarketing({ brand = "Digi Spark", onPrimaryCT
     subtitle:
       "Strategy, content, and performance all in one place. We plan, create, publish, and optimize across platforms to get you real business results.",
     bullets: [
-      { icon: "bi-graph-up-arrow", text: "ROI‑focused growth campaigns" },
-      { icon: "bi-magic", text: "High‑quality creatives & UGC" },
-      { icon: "bi-speedometer2", text: "Always‑on optimization & reporting" },
+      { icon: "bi-graph-up-arrow", text: "ROI-focused growth campaigns" },
+      { icon: "bi-magic", text: "High-quality creatives & UGC" },
+      { icon: "bi-speedometer2", text: "Always-on optimization & reporting" },
     ],
     image:
       "https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?q=80&w=1600&auto=format&fit=crop",
@@ -87,13 +78,13 @@ export default function SocialMediaMarketing({ brand = "Digi Spark", onPrimaryCT
     {
       icon: "bi-camera-video",
       title: "Content Production & UGC",
-      desc: "Short‑form video, carousels, static posts, motion graphics, and creator‑led content.",
+      desc: "Short-form video, carousels, static posts, motion graphics, and creator-led content.",
       points: ["UGC sourcing", "Shoot & edit", "Brand templates"],
     },
     {
       icon: "bi-megaphone",
       title: "Paid Social & Funnels",
-      desc: "Full‑funnel paid social across Meta, TikTok, YouTube, and LinkedIn for scalable growth.",
+      desc: "Full-funnel paid social across Meta, TikTok, YouTube, and LinkedIn for scalable growth.",
       points: ["Meta/TikTok/YouTube/LinkedIn", "Retargeting", "ROAS optimization"],
     },
     {
@@ -121,7 +112,7 @@ export default function SocialMediaMarketing({ brand = "Digi Spark", onPrimaryCT
     { title: "Plan & Calendar", icon: "bi-calendar3", text: "Monthly pillars, hooks, and shoot plan with approvals." },
     { title: "Produce & Publish", icon: "bi-film", text: "UGC + studio content, daily posting & stories/reels." },
     { title: "Amplify (Paid)", icon: "bi-rocket-takeoff", text: "Test creatives, scale winners, retarget warm audiences." },
-    { title: "Engage & Partner", icon: "bi-people", text: "Reply DMs, comments, micro‑influencers & collabs." },
+    { title: "Engage & Partner", icon: "bi-people", text: "Reply DMs, comments, micro-influencers & collabs." },
     { title: "Measure & Improve", icon: "bi-bar-chart-line", text: "Weekly checks, monthly reports, growth roadmap." },
   ];
 
@@ -148,12 +139,12 @@ export default function SocialMediaMarketing({ brand = "Digi Spark", onPrimaryCT
         "Scaled Meta + TikTok with UGC hooks, creator seeding, and weekly creative sprints.",
     },
     {
-      title: "EdTech — 3x sign‑ups at same spend",
+      title: "EdTech — 3x sign-ups at same spend",
       image: "https://images.unsplash.com/photo-1554446422-c4d46271ab85?q=80&w=1600&auto=format&fit=crop",
       metrics: [
-        { label: "Sign‑ups", value: "+3x" },
+        { label: "Sign-ups", value: "+3x" },
         { label: "CPA", value: "-35%" },
-        { label: "Watch‑time", value: "+78%" },
+        { label: "Watch-time", value: "+78%" },
       ],
       summary:
         "YouTube Shorts + LinkedIn carousels, improved landing pages and better onboarding funnel.",
@@ -167,15 +158,16 @@ export default function SocialMediaMarketing({ brand = "Digi Spark", onPrimaryCT
         { label: "CPL", value: "-22%" },
       ],
       summary:
-        "LinkedIn ABM: thought‑leadership pods, case‑carousel series, and founder video posts.",
+        "LinkedIn ABM: thought-leadership pods, case-carousel series, and founder video posts.",
     },
   ];
 
+  // ---------- UPDATED: USD pricing ----------
   const plans = [
     {
       name: "Starter Social",
-      price: "₹19,000/mo",
-      desc: "For early‑stage brands getting consistent with content.",
+      price: "$216/mo",
+      desc: "For early-stage brands getting consistent with content.",
       highlights: [
         "8 posts + 4 stories/mo",
         "1 platform",
@@ -187,7 +179,7 @@ export default function SocialMediaMarketing({ brand = "Digi Spark", onPrimaryCT
     },
     {
       name: "Growth Engine",
-      price: "₹49,000/mo",
+      price: "$557/mo",
       desc: "For brands ready to scale with paid + UGC.",
       highlights: [
         "16 posts + 8 stories/mo",
@@ -202,7 +194,7 @@ export default function SocialMediaMarketing({ brand = "Digi Spark", onPrimaryCT
     {
       name: "Enterprise",
       price: "Custom",
-      desc: "Full creative pods, multi‑region, and heavy experimentation.",
+      desc: "Full creative pods, multi-region, and heavy experimentation.",
       highlights: [
         "Creative sprints",
         "Influencer seeding",
@@ -217,7 +209,7 @@ export default function SocialMediaMarketing({ brand = "Digi Spark", onPrimaryCT
 
   const faqs = [
     { q: "How soon can we start?", a: "Usually within 1–2 weeks after audit and onboarding." },
-    { q: "Can you work with our in‑house team?", a: "Yes. We often act as a creative + media pod plugged into your team." },
+    { q: "Can you work with our in-house team?", a: "Yes. We often act as a creative + media pod plugged into your team." },
     { q: "Which platforms do you recommend?", a: "We choose based on ICP and goals; most brands start with Instagram + Meta or LinkedIn + YouTube." },
     { q: "Do you guarantee results?", a: "We don't promise vanity metrics. We target business KPIs and share clear experiments & projections." },
   ];
@@ -233,7 +225,6 @@ export default function SocialMediaMarketing({ brand = "Digi Spark", onPrimaryCT
 
   // ---------- Render ----------
   return (
-    
     <main className="bg-light">
       <Header />
       {/* HERO */}
@@ -299,7 +290,7 @@ export default function SocialMediaMarketing({ brand = "Digi Spark", onPrimaryCT
         <Container>
           <div className="text-center mb-4">
             <Badge bg="secondary" className="bg-opacity-10 text-secondary">Where we operate</Badge>
-            <h2 className="mt-2 fw-semibold fs-1">Multi‑platform execution</h2>
+            <h2 className="mt-2 fw-semibold fs-1">Multi-platform execution</h2>
             <p className="text-muted">We prioritize the platforms your audience actually uses and adapt creative to native formats.</p>
           </div>
           <Row className="g-3 text-center">
@@ -320,10 +311,10 @@ export default function SocialMediaMarketing({ brand = "Digi Spark", onPrimaryCT
         <Container>
           <div className="text-center mb-4">
             <Badge bg="secondary" className="bg-opacity-10 text-secondary">What we do</Badge>
-            <h2 className="mt-2 fw-semibold fs-1">Full‑service social that performs</h2>
+            <h2 className="mt-2 fw-semibold fs-1">Full-service social that performs</h2>
             <p className="text-muted">From content to media buying, our pod covers every moving part so you can focus on the business.</p>
           </div>
-          <Row className="g-4">
+        <Row className="g-4">
             {services.map((s, i) => (
               <Col sm={6} lg={4} key={i}>
                 <Card className="h-100 shadow-sm border-0 rounded-4">
@@ -347,9 +338,7 @@ export default function SocialMediaMarketing({ brand = "Digi Spark", onPrimaryCT
       </section>
 
       {/* SAMPLE CALENDAR */}
-      {/* WEEK CALENDAR — Upgraded */}
       <WeekCalendarSection data={sampleCalendar} />
-
 
       {/* CASE STUDIES */}
       <section id="cases" className="py-5 bg-light">
@@ -411,7 +400,7 @@ export default function SocialMediaMarketing({ brand = "Digi Spark", onPrimaryCT
         </Container>
       </section>
 
-      {/* KPI COMPARISON (optional table) */}
+      {/* KPI COMPARISON */}
       <section className="py-5 bg-light">
         <Container>
           <div className="text-center mb-4">
@@ -429,11 +418,12 @@ export default function SocialMediaMarketing({ brand = "Digi Spark", onPrimaryCT
                 </tr>
               </thead>
               <tbody>
+                {/* UPDATED: USD examples, rounded for readability */}
                 <tr><td>ROAS</td><td>1.2x</td><td>3.0x+</td></tr>
                 <tr><td>CTR</td><td>0.7%</td><td>1.5%–3.0%</td></tr>
-                <tr><td>CPM</td><td>₹260</td><td>₹180–₹220</td></tr>
-                <tr><td>CPL (B2B)</td><td>₹1,200</td><td>₹700–₹900</td></tr>
-                <tr><td>Watch‑time (Shorts/Reels)</td><td>12s</td><td>20–28s</td></tr>
+                <tr><td>CPM</td><td>$3.0</td><td>$2.0–$2.5</td></tr>
+                <tr><td>CPL (B2B)</td><td>$14</td><td>$8–$10</td></tr>
+                <tr><td>Watch-time (Shorts/Reels)</td><td>12s</td><td>20–28s</td></tr>
               </tbody>
             </Table>
           </div>
@@ -487,9 +477,9 @@ export default function SocialMediaMarketing({ brand = "Digi Spark", onPrimaryCT
             <Col lg={6}>
               <Badge bg="secondary" className="bg-opacity-10 text-secondary">Get in touch</Badge>
               <h2 className="mt-2 fw-semibold fs-1">Tell us your growth goals</h2>
-              <p className="text-muted">Share your product, ICP, and targets—we'll reply with a mini‑roadmap and projected KPIs.</p>
+              <p className="text-muted">Share your product, ICP, and targets—we'll reply with a mini-roadmap and projected KPIs.</p>
               <Row xs={2} className="g-2 small text-secondary">
-                <Col><i className="bi bi-check2-circle text-success me-2"/>24‑hour response</Col>
+                <Col><i className="bi bi-check2-circle text-success me-2"/>24-hour response</Col>
                 <Col><i className="bi bi-check2-circle text-success me-2"/>Weekly reports</Col>
                 <Col><i className="bi bi-check2-circle text-success me-2"/>Creator network</Col>
                 <Col><i className="bi bi-check2-circle text-success me-2"/>NDA on request</Col>
@@ -503,7 +493,8 @@ export default function SocialMediaMarketing({ brand = "Digi Spark", onPrimaryCT
                       <Col sm={6}><Form.Group><Form.Label className="small">Full name</Form.Label><Form.Control required/></Form.Group></Col>
                       <Col sm={6}><Form.Group><Form.Label className="small">Work email</Form.Label><Form.Control type="email" required/></Form.Group></Col>
                       <Col sm={6}><Form.Group><Form.Label className="small">Company</Form.Label><Form.Control/></Form.Group></Col>
-                      <Col sm={6}><Form.Group><Form.Label className="small">Monthly ad budget (₹)</Form.Label><Form.Control type="number" min={0}/></Form.Group></Col>
+                      {/* UPDATED: currency label */}
+                      <Col sm={6}><Form.Group><Form.Label className="small">Monthly ad budget (USD)</Form.Label><Form.Control type="number" min={0}/></Form.Group></Col>
                       <Col xs={12}><Form.Group><Form.Label className="small">What do you want to achieve?</Form.Label><Form.Control as="textarea" rows={5} required/></Form.Group></Col>
                     </Row>
                     <Button type="submit" variant="dark" className="mt-3">Get Growth Plan <i className="bi bi-arrow-right ms-2"/></Button>

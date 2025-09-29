@@ -174,10 +174,11 @@ export default function SearchEngineOptimization({
     },
   ];
 
+  // ✅ UPDATED TO USD
   const plans = [
     {
       name: "Starter SEO",
-      price: "₹24,000/mo",
+      price: "$273/mo",
       desc: "For early-stage sites needing fundamentals done right.",
       highlights: [
         "Technical audit & fixes",
@@ -190,7 +191,7 @@ export default function SearchEngineOptimization({
     },
     {
       name: "Growth SEO",
-      price: "₹59,000/mo",
+      price: "$670/mo",
       desc: "Compound growth with clusters, links, and dashboards.",
       highlights: [
         "Quarterly strategy",

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {
-  HashRouter,
+  BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
@@ -18,12 +18,14 @@ import AnalyticsDashboard from './AnalyticsDashboard';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Terms from './components/Terms';
 import ReturnRefund from './components/ReturnRefund';
-
+import PrintCare from './components/print-assist';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  
   <React.StrictMode>
-    <HashRouter>
+    <BrowserRouter>
+    
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/home" element={<App />} />
@@ -36,13 +38,14 @@ root.render(
         <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
         <Route path="/Terms" element={<Terms />} />
         <Route path="/ReturnRefund" element={<ReturnRefund />} />
+        <Route path="/print-assist" element={<PrintCare />} />
         <Route path="*" element={
-          <div style={{textAlign:'center',padding:'80px 0'}}>
+          <div style={{ textAlign: 'center', padding: '80px 0' }}>
             <h1>404 - Page Not Found</h1>
             <p>The page you are looking for does not exist.</p>
           </div>
         } />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   </React.StrictMode>
 );

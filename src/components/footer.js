@@ -116,12 +116,15 @@ export default function Footer() {
             {/* Brand + Social + Newsletter */}
             <Col lg={4}>
               <div className="d-flex align-items-center gap-2 mb-2">
-                <div
-                  style={{
-                    width: 40, height: 40, borderRadius: 10,
-                    background: theme.grad,
-                  }}
-                />
+                <img
+  src="/mydigitalrise_logo.png"
+  alt="MyDigitalRise logo"
+  width={40}
+  height={40}
+  style={{ borderRadius: 10, objectFit: "cover", display: "block" }}
+  loading="lazy"
+  decoding="async"
+/>
                 <div className="h4 mb-0">Digital Rise</div>
               </div>
               <p className="small" style={{ color: theme.sub }}>
@@ -194,8 +197,8 @@ export default function Footer() {
             <Col lg={3} id="contact">
               <div className="fw-semibold mb-2">Contact</div>
               <div className="small" style={{ color: theme.sub }}>
-                <div className="mb-1"><i className="bi bi-geo-alt me-2" /> 221B Baker Street, Mumbai, IN</div>
-                <div className="mb-1"><i className="bi bi-telephone me-2" /> +91 90000 00000</div>
+                <div className="mb-1"><i className="bi bi-geo-alt me-2" /> 1506 Cherokee St, Deer Park, TX 77536</div>
+                {/* <div className="mb-1"><i className="bi bi-telephone me-2" /> +91 90000 00000</div> */}
                 <div><i className="bi bi-envelope me-2" /> info@mydigitalrise.com</div>
               </div>
 

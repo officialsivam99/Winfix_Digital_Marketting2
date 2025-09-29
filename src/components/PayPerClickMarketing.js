@@ -168,10 +168,11 @@ export default function PayPerClickMarketing({
     },
   ];
 
+  // ---- USD pricing (₹→USD ≈ 88:1) ----
   const plans = [
     {
       name: "Launch PPC",
-      price: "₹29,000/mo",
+      price: "$330/mo",
       desc: "For new accounts or small spends getting structured.",
       highlights: ["Search + basic PMax", "Pixel/GA4 setup", "4 ad sets/mo", "Monthly report"],
       cta: "Get Starter",
@@ -179,7 +180,7 @@ export default function PayPerClickMarketing({
     },
     {
       name: "Growth PPC",
-      price: "₹69,000/mo",
+      price: "$784/mo",
       desc: "For scaling brands with creative testing and automation.",
       highlights: ["Search + Shopping + Meta", "UGC pipeline", "Scripts/rules", "Weekly dashboard"],
       cta: "Scale with Us",
@@ -228,14 +229,14 @@ export default function PayPerClickMarketing({
     setTimeout(() => setPlanMsg(""), 2500);
   };
 
-  /* ================== Calculators ================== */
+  /* ================== Calculators (USD) ================== */
   // Budget → Clicks → Leads → Revenue → ROAS
   const [calc, setCalc] = useState({
-    monthlyBudget: 50000,
-    avgCPC: 25,
+    monthlyBudget: 568,  // ~$ based on 50,000₹
+    avgCPC: 0.28,        // ~$ based on 25₹
     convRate: 3.2,       // site CVR %
     leadToSale: 25,      // % of leads that close (B2B) or cart CVR for ecom
-    avgOrderValue: 3000, // AOV/LTV slice
+    avgOrderValue: 34,   // ~$ based on 3,000₹
   });
 
   const derived = useMemo(() => {
@@ -441,7 +442,7 @@ export default function PayPerClickMarketing({
                     <Row className="g-3">
                       <Col sm={6}>
                         <Form.Group>
-                          <Form.Label className="small">Monthly budget (₹)</Form.Label>
+                          <Form.Label className="small">Monthly budget ($)</Form.Label>
                           <Form.Control
                             type="number"
                             min={0}
@@ -452,11 +453,11 @@ export default function PayPerClickMarketing({
                       </Col>
                       <Col sm={6}>
                         <Form.Group>
-                          <Form.Label className="small">Avg. CPC (₹)</Form.Label>
+                          <Form.Label className="small">Avg. CPC ($)</Form.Label>
                           <Form.Control
                             type="number"
-                            min={0.1}
-                            step="0.1"
+                            min={0.01}
+                            step="0.01"
                             value={calc.avgCPC}
                             onChange={(e)=>setCalc(v=>({...v, avgCPC: +e.target.value}))}
                           />
@@ -488,7 +489,7 @@ export default function PayPerClickMarketing({
                       </Col>
                       <Col sm={6}>
                         <Form.Group>
-                          <Form.Label className="small">Avg Order Value / LTV slice (₹)</Form.Label>
+                          <Form.Label className="small">Avg Order Value / LTV slice ($)</Form.Label>
                           <Form.Control
                             type="number"
                             min={0}
@@ -503,7 +504,7 @@ export default function PayPerClickMarketing({
                   <Table responsive bordered size="sm" className="mt-3 align-middle">
                     <thead className="table-light">
                       <tr>
-                        <th>Clicks</th><th>Leads</th><th>Sales</th><th>Revenue (₹)</th><th>ROAS</th>
+                        <th>Clicks</th><th>Leads</th><th>Sales</th><th>Revenue ($)</th><th>ROAS</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -511,7 +512,7 @@ export default function PayPerClickMarketing({
                         <td>{derived.clicks.toLocaleString()}</td>
                         <td>{derived.leads.toLocaleString()}</td>
                         <td>{derived.sales.toLocaleString()}</td>
-                        <td>{derived.revenue.toLocaleString()}</td>
+                        <td>${derived.revenue.toLocaleString()}</td>
                         <td>{derived.roas}×</td>
                       </tr>
                     </tbody>
@@ -771,7 +772,7 @@ export default function PayPerClickMarketing({
               </Col>
               <Col sm={6}>
                 <Form.Group>
-                  <Form.Label className="small">Monthly ad budget (₹)</Form.Label>
+                  <Form.Label className="small">Monthly ad budget ($)</Form.Label>
                   <Form.Control type="number" min={0} />
                 </Form.Group>
               </Col>
@@ -808,15 +809,6 @@ export default function PayPerClickMarketing({
           <Alert variant="success" className="shadow-sm border">{planMsg}</Alert>
         </div>
       )}
-      <Footer />
-    </>
-  );
-  // ...existing code...
-  return (
-    <>
-      <Header />
-      {/* ...existing JSX... */}
-      {/* All your main JSX goes here, including the Modal, Alerts, etc. */}
       <Footer />
     </>
   );

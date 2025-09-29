@@ -16,10 +16,16 @@ export default function Header() {
       <div className="ff-wrap">
         {/* Left: Brand */}
         <Link to="/" className="ff-brand">
-          <div className="ff-logo">
-            <span className="ff-logo-mark" />
-          </div>
-          <span className="ff-name">Digital Risen</span>
+          <img
+  src="/mydigitalrise_logo.png"
+  alt="MyDigitalRise logo"
+  width={40}
+  height={40}
+  style={{ borderRadius: 10, objectFit: "cover", display: "block" }}
+  loading="lazy"
+  decoding="async"
+/>
+          <span className="ff-name">Digital Rise</span>
         </Link>
 
         {/* Mobile hamburger */}
@@ -46,12 +52,12 @@ export default function Header() {
         {/* Right: Actions */}
         <div className="ff-actions">
           
-          <Link to="/demo" className="ff-btn ff-outline">
+          {/* <Link to="/demo" className="ff-btn ff-outline">
             Contact Us
-          </Link>
-          <Link to="/get-started" className="ff-btn ff-solid">
+          </Link> */}
+          {/* <Link to="/get-started" className="ff-btn ff-solid">
             Get started
-          </Link>
+          </Link> */}
         </div>
       </div>
 

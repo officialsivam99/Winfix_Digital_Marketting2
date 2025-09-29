@@ -130,10 +130,10 @@ export default function PostHeroSection() {
   ];
 
   const plans = [
-    { name: "Starter",    m: 24000, feat: ["1 website/LP", "SEO basics", "1 ad channel", "Monthly report"] },
-    { name: "Growth",     m: 59000, feat: ["2–3 channels", "CRO tests", "Flows + templates", "Weekly dashboard"], popular: true },
-    { name: "Enterprise", m: 0,     feat: ["PMax guardrails", "Server-side", "Looker suite", "SLA & security"] },
-  ];
+  { name: "Starter",    m: 273, feat: ["1 website/LP", "SEO basics", "1 ad channel", "Monthly report"] },
+  { name: "Growth",     m: 670, feat: ["2–3 channels", "CRO tests", "Flows + templates", "Weekly dashboard"], popular: true },
+  { name: "Enterprise", m: 0,   feat: ["PMax guardrails", "Server-side", "Looker suite", "SLA & security"] },
+];
 
   const faqs = [
     { q: "What industries do you specialize in?", a: "D2C, SaaS, marketplaces, and services. We adapt playbooks to your reality." },
@@ -208,10 +208,10 @@ export default function PostHeroSection() {
   const [showSticky, setShowSticky] = useState(true);
 
   const priceLabel = (p) => {
-    if (p === 0) return "Custom";
-    if (billing.startsWith("Yearly")) return `₹${Math.round(p * 0.85).toLocaleString()}/mo`;
-    return `₹${p.toLocaleString()}/mo`;
-  };
+  if (p === 0) return "Custom";
+  const val = billing.startsWith("Yearly") ? Math.round(p * 0.85) : p;
+  return `$${val.toLocaleString()}/mo`;
+};
 
   /* ===================== UTIL: Sparkline ===================== */
   const Spark = ({ data = [], w = 120, h = 36 }) => {
@@ -620,7 +620,8 @@ export default function PostHeroSection() {
                           </Form.Select>
                         </Form.Group>
                       </Col>
-                      <Col sm={6}><Form.Group><Form.Label className="small">Monthly budget (₹)</Form.Label><Form.Control type="number" min={0} /></Form.Group></Col>
+                      <Col sm={6}><Form.Group><Form.Label className="small">Monthly budget ($)</Form.Label>
+<Form.Control type="number" min={0} /></Form.Group></Col>
                       <Col xs={12}><Form.Group><Form.Label className="small">Notes</Form.Label><Form.Control as="textarea" rows={3} placeholder="Goals, timeline, anything else…" /></Form.Group></Col>
                     </Row>
                     <div className="d-flex gap-2 mt-3">

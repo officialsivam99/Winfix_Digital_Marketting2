@@ -144,10 +144,11 @@ export default function EmailMarketing({
     { name: "Re-engage", tag: "Re-engage", subject: "Still want emails?", preview: "Choose your preferences" },
   ];
 
+  // ---- USD PRICING ----
   const plans = [
     {
       name: "Starter Email",
-      price: "₹19,000/mo",
+      price: "$216/mo",
       desc: "Templates + 1-2 flows + monthly campaigns.",
       highlights: ["Welcome + Post-purchase", "2 promos/mo", "Basic reporting"],
       cta: "Get Starter",
@@ -155,7 +156,7 @@ export default function EmailMarketing({
     },
     {
       name: "Growth Lifecycle",
-      price: "₹49,000/mo",
+      price: "$557/mo",
       desc: "Full lifecycle, testing, and segmentation.",
       highlights: ["6+ flows", "4 promos/mo", "A/B + cohort insights"],
       cta: "Scale with Us",
@@ -204,13 +205,13 @@ export default function EmailMarketing({
     setTimeout(() => setAssetMsg(""), 2500);
   };
 
-  /* ============== Planner (List → Revenue) ============== */
+  /* ============== Planner (List → Revenue) — USD ============== */
   const [calc, setCalc] = useState({
     listSize: 20000,
     openRate: 28,   // %
     clickRate: 3.5, // % of total recipients
     convRate: 2.2,  // % of clickers
-    aov: 1800,      // ₹
+    aov: 20,        // $ (converted from ~₹1800)
     sendsPerMonth: 8,
   });
   const derived = useMemo(() => {
@@ -484,7 +485,7 @@ export default function EmailMarketing({
                       </Col>
                       <Col sm={12}>
                         <Form.Group>
-                          <Form.Label className="small">AOV / LTV slice (₹)</Form.Label>
+                          <Form.Label className="small">AOV / LTV slice (USD)</Form.Label>
                           <Form.Control type="number" min={0}
                             value={calc.aov}
                             onChange={(e)=>setCalc(v=>({...v, aov:+e.target.value}))}/>
@@ -504,13 +505,13 @@ export default function EmailMarketing({
                         <td>{derived.opens.toLocaleString()}</td>
                         <td>{derived.clicks.toLocaleString()}</td>
                         <td>{derived.orders.toLocaleString()}</td>
-                        <td>₹{derived.revenuePerSend.toLocaleString()}</td>
-                        <td>₹{derived.monthlyRevenue.toLocaleString()}</td>
+                        <td>${derived.revenuePerSend.toLocaleString()}</td>
+                        <td>${derived.monthlyRevenue.toLocaleString()}</td>
                       </tr>
                     </tbody>
                   </Table>
                   <div className="small text-secondary">
-                    Tip: Boost opens via better **subject + send time**; clicks via **clear CTAs**; orders via **offers & PDP speed**.
+                    Tip: Boost opens via better <strong>subject + send time</strong>; clicks via <strong>clear CTAs</strong>; orders via <strong>offers & PDP speed</strong>.
                   </div>
                 </Card.Body>
               </Card>
